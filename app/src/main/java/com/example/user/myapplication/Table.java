@@ -1,5 +1,7 @@
 package com.example.user.myapplication;
 
-public class Table {
+import java.util.ArrayList;
 
+public class Table extends Spot{
+	ArrayList<Chair> chairs;
 }
