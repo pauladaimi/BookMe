@@ -1,0 +1,11 @@
+{
+  "name": "bookmeserver",
+  "version": "1.0.0",
+  "description": "server for the space provider clients of BookMe",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Danny Abraham & Maarouf AlArnaout",
+  "license": "ISC"
+}
