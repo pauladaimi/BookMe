@@ -1,9 +1,5 @@
 package com.example.user.myapplication;
 
-<<<<<<< HEAD
-public interface Spot {
-
-=======
 import android.graphics.Canvas;
 
 abstract class Spot implements Shape{
@@ -16,5 +12,4 @@ abstract class Spot implements Shape{
 
 	}
 	
->>>>>>> 27aebe687272e2064697e5ebd96a576d3ea9fb6b
 }

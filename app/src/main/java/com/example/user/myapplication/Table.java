@@ -1,9 +1,7 @@
 package com.example.user.myapplication;
 
-public class Table {
+import java.util.ArrayList;
 
-<<<<<<< HEAD
-=======
 public class Table extends Spot{
 	private ArrayList<Chair> chairs;
 	private Shape shape;
@@ -17,5 +15,4 @@ public class Table extends Spot{
 		this.shape=shape;
 	}
 
->>>>>>> 27aebe687272e2064697e5ebd96a576d3ea9fb6b
 }

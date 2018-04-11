@@ -1,9 +1,8 @@
 package com.example.user.myapplication;
 
-public class Room {
-<<<<<<< HEAD
+import java.util.ArrayList;
 
-=======
+public class Room {
 	int ID;
 	int height;
 	int width;
@@ -17,5 +16,4 @@ public class Room {
 		this.tables=tables;
 		this.decorations=decorations;
 	}
->>>>>>> 27aebe687272e2064697e5ebd96a576d3ea9fb6b
 }
