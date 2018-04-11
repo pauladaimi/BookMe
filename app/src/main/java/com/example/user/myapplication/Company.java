@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by User on 4/10/2018.
  */
 
-public class Company {
+public class Company{
     String name;
     ArrayList<Room> rooms;
 

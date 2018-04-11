@@ -11,10 +11,15 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -22,6 +27,11 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private Button search;
+
+    EditText editText;
+
+    private ListView listView;
+    private ArrayAdapter<String> mAdapter;
 
     private TextView mTextMessage;
     private ImageView imageView;
@@ -33,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText("Search");
+                    //mTextMessage.setText("Search");
                     return true;
                 case R.id.navigation_dashboard:
                     //mTextMessage.setText("Profile");
@@ -53,10 +63,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         imageView=(ImageView) findViewById(R.id.imageView);
         search=(Button) findViewById(R.id.searchBtn);
+        editText=(EditText) findViewById(R.id.editText);
+
+        listView=(ListView) findViewById(R.id.listView);
+        mAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
+
+        listView.setAdapter(mAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                editText.setText(""+i);
+            }
+        });
+
+        mAdapter.add("Karim");
+        mAdapter.add("Paul");
+
+        mAdapter.notifyDataSetChanged();
+
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bitmap bitmap = Bitmap.createBitmap(500,300,Bitmap.Config.ARGB_8888);
+                Bitmap bitmap = Bitmap.createBitmap(1000,500,Bitmap.Config.ARGB_8888);
 
                 Canvas canvas = new Canvas(bitmap);
 

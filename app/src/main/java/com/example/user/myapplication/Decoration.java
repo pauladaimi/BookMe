@@ -1,5 +1,5 @@
 package com.example.user.myapplication;
 
-public class Decoration {
+public class Decoration extends Spot {
 
 }
