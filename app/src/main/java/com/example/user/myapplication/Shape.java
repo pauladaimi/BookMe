@@ -1,5 +1,5 @@
 package com.example.user.myapplication;
 
-public interface Shape extends Drawable{
-	
+public enum Shape{
+	Rectangle,Oval
 }

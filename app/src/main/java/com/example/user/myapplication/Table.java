@@ -4,15 +4,13 @@ import java.util.ArrayList;
 
 public class Table extends Spot{
 	private ArrayList<Chair> chairs;
-	private Shape shape;
 
-	public Table(ArrayList<Chair> chairs, Shape shape){
-		this.chairs=chairs;
-		this.shape=shape;
+	public Table(int ID, int X, int Y, int width, int height, Shape shape,int color) {
+		super(ID, X, Y, width, height, shape, color);
 	}
 
-	public Table(Shape shape){
-		this.shape=shape;
+	public void addChairs(ArrayList<Chair> chairs){
+		this.chairs=chairs;
 	}
 
 }

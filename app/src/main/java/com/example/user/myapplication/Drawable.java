@@ -3,5 +3,5 @@ package com.example.user.myapplication;
 import android.graphics.Canvas;
 
 public interface Drawable {
-	public void draw(Canvas canvas);
+	void draw(Canvas canvas);
 }

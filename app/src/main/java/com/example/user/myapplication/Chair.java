@@ -6,8 +6,8 @@ import android.graphics.Rect;
 public class Chair extends Spot{
     private Rect rectangle;
 
-    public void draw(Canvas canvas)  {
-
+    public Chair(int ID, int X, int Y, int width, int height, Shape shape, int color) {
+        super(ID, X, Y, width, height, shape, color);
     }
 
 }
