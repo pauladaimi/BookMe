@@ -8,7 +8,7 @@ public class Info {
     @SerializedName("id")
     @Expose
     private String id;
-    @SerializedName("name")
+    @SerializedName("editName")
     @Expose
     private String name;
     @SerializedName("description")

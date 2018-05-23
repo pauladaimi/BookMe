@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Spot implements Drawable{
 	private Shape shape=Shape.Rectangle;
-	private int color=Color.GRAY;
+	private int color;
 	@SerializedName("x")
 	@Expose
 	private Double x;
@@ -27,7 +27,7 @@ public class Spot implements Drawable{
 	@SerializedName("id")
 	@Expose
 	private Integer id;
-	@SerializedName("name")
+	@SerializedName("editName")
 	@Expose
 	private String name;
 	@SerializedName("description")
@@ -101,12 +101,14 @@ public class Spot implements Drawable{
 	}
 
 	@Override
-	public void draw(Canvas canvas) {
+	public void draw(Canvas canvas, int col) {
+
 		Paint paint = new Paint();
-		paint.setColor(Color.GRAY);
+		paint.setColor(col);
 		//if(shape==Shape.Rectangle){
-			Rect rect = new Rect(x.intValue(),y.intValue(),x.intValue()+w.intValue(),y.intValue()+h.intValue());
-			canvas.drawRect(rect,paint);
+		Rect rect = new Rect(x.intValue(),y.intValue(),x.intValue()+w.intValue(),y.intValue()+h.intValue());
+		canvas.drawRect(rect,paint);
+
 		//}
 		//else if(shape==Shape.Oval){
 		//	RectF oval = new RectF(x.intValue(),y.intValue(),x.intValue()+w.intValue(),y.intValue()+h.intValue());

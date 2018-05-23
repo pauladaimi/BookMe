@@ -34,7 +34,7 @@ public class Space {
     public String toString(){
         String SpaceString="";
         for(int i=0; i<spots.size();i++){
-            SpaceString+= spots.get(i).getX()+" " +spots.get(i).getY() ;
+            SpaceString += "%X: " +  spots.get(i).getX()+ " %Y: " +spots.get(i).getY() + " " ;
         }
 
         SpaceString+=" "+getInfo().getName();

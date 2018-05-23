@@ -2,6 +2,7 @@ package com.example.user.myapplication;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -16,7 +17,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by User on 5/16/2018.
+ * Created by AppUser on 5/16/2018.
  */
 
 public class BookActivity extends Activity {
@@ -26,6 +27,7 @@ public class BookActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -41,12 +43,11 @@ public class BookActivity extends Activity {
             @Override
             public void onResponse(Call<Space> call, Response<Space> response) {
                 if(response.isSuccessful()){
-                    Log.d("BOOK ME","Successfull");
+                    Log.d("BOOK ME","Successful");
                     space=response.body();
                     Log.d("BOOK ME", response.body().toString());
                     setContentView(new BookPanel(context,space));
-                }
-                else{
+                } else{
                     Log.d("BOOK ME", response.message());
                 }
 
