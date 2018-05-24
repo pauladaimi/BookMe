@@ -41,8 +41,9 @@ public class BookActivity extends Activity {
         Constants.SCREEN_HEIGHT=dm.heightPixels;
         context=this;
         RetrofitClient.initRetrofit(this);
+        String spaceId = getIntent().getExtras().getString("spaceId");
 
-        ApiUtils.getBookService().getSpace("b34mx5Djv4obp7OFeTYy").enqueue(new Callback<Space>() {
+        ApiUtils.getBookService().getSpace(spaceId).enqueue(new Callback<Space>() {
             @Override
             public void onResponse(Call<Space> call, Response<Space> response) {
                 if(response.isSuccessful()){

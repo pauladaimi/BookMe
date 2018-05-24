@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CompaniesActivity extends AppCompatActivity {//ListActivity {
+public class CompaniesActivity extends AppCompatActivity {
 
     Context context;
     ListView companies;

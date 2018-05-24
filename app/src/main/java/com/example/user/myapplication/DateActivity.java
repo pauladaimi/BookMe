@@ -17,9 +17,16 @@ import android.widget.TimePicker;
 import android.text.format.DateFormat;
 
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DateActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
@@ -38,6 +45,8 @@ public class DateActivity extends AppCompatActivity implements DatePickerDialog.
     int day, month, year, hour, minute;
     int startDayFinal, startMonthFinal, startYearFinal, startHourFinal, startMinuteFinal;
     int endDayFinal, endMonthFinal, endYearFinal, endHourFinal, endMinuteFinal;
+    Long startDateMillis;
+    Long endDateMillis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +61,11 @@ public class DateActivity extends AppCompatActivity implements DatePickerDialog.
         tv_result2 = (TextView) findViewById(R.id.tv_result2);
         command = (TextView) findViewById(R.id.command);
 
+        Intent intent = getIntent();
 
+        final String spaceId = intent.getExtras().getString("spaceId");
+        final Integer spotId = intent.getExtras().getInt("spotId");
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         b_pick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +84,29 @@ public class DateActivity extends AppCompatActivity implements DatePickerDialog.
             @Override
             public void onClick(View view) {
                 if(counter > 0){
+                    Reservation reservation = new Reservation();
+                    reservation.setSpaceId(spaceId);
+                    reservation.setSpotId(spotId);
+                    reservation.setUserId(user.getUid());
+                    reservation.setStart(startDateMillis);
+                    reservation.setEnd(endDateMillis);
+                    ApiUtils.getBookService().makeReservation(reservation).enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if (response.isSuccessful()) {
+                                Intent e = new Intent(context, QRGeneratorActivity.class);
+                                startActivity(e);
+                            } else {
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
                     Intent e = new Intent(context, QRGeneratorActivity.class);
                     startActivity(e);
                 }
@@ -124,7 +160,7 @@ public class DateActivity extends AppCompatActivity implements DatePickerDialog.
             String startDate =  startMonthFinal + "/" + startDayFinal + "/" + startYearFinal + " " + startHourFinal + ":" + startMinuteFinal;
 
             try {
-                Long startDateMillis = new SimpleDateFormat("MM/dd/yyyy hh:mm").parse(startDate).getTime();
+               startDateMillis = new SimpleDateFormat("MM/dd/yyyy hh:mm").parse(startDate).getTime();
                 System.out.println(" Start Date Epoch time in millis: " + startDateMillis);
             }catch (ParseException e) {
                 e.printStackTrace();
@@ -143,8 +179,8 @@ public class DateActivity extends AppCompatActivity implements DatePickerDialog.
 
             String endDate =  endMonthFinal + "/" + endDayFinal + "/" + endYearFinal + " " + endHourFinal + ":" + endMinuteFinal;
             try {
-                Long startDateMillis = new SimpleDateFormat("MM/dd/yyyy hh:mm").parse(endDate).getTime();
-                System.out.println(" End Date Epoch time in millis: " + startDateMillis);
+                endDateMillis = new SimpleDateFormat("MM/dd/yyyy hh:mm").parse(endDate).getTime();
+                System.out.println(" End Date Epoch time in millis: " + endDateMillis);
             }catch (ParseException e) {
                 e.printStackTrace();
             }

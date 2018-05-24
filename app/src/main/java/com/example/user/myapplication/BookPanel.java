@@ -31,12 +31,15 @@ public class BookPanel extends SurfaceView implements SurfaceHolder.Callback{
     SurfaceHolder surface;
     Context context;
     Rect r;
+    Space space;
+    int duplicateSpot = 0;
 
     boolean isPortrait = false;
 
 
     public BookPanel(Context context, Space space) {
         super(context);
+        this.space = space;
         spots = new ArrayList<Spot>();
         spots.addAll(space.getSpots());
         double ratio = 1;
@@ -52,14 +55,14 @@ public class BookPanel extends SurfaceView implements SurfaceHolder.Callback{
 
 
         for(int i=0;i<spots.size();i++){
-
+            System.out.println("SPOTS:                  "  + i);
             spots.get(i).setX(spots.get(i).getX()*Constants.SCREEN_WIDTH);
             spots.get(i).setY(spots.get(i).getY()*Constants.SCREEN_HEIGHT/ratio + 0.05*Constants.SCREEN_HEIGHT );
             spots.get(i).setH(spots.get(i).getH()*Constants.SCREEN_HEIGHT/ratio);
             spots.get(i).setW(spots.get(i).getW()*Constants.SCREEN_WIDTH);
 
         }
-        Log.d("BOOOOOK ME", spots.get(1).getX()+" "+ spots.get(1).getW());
+        //Log.d("BOOOOOK ME", spots.get(1).getX()+" "+ spots.get(1).getW());
         getHolder().addCallback(this);
         setFocusable(true);
     }
@@ -99,6 +102,7 @@ public class BookPanel extends SurfaceView implements SurfaceHolder.Callback{
                             for (int j = 0; j < reservedSpotsIDs.size(); j++) {
                                 if ((reservedSpotsIDs.get(j) == spots.get(i).getId()) ) {
                                     duplicateID = true;
+                                    duplicateSpot = j;
                                 }
                             }
 
@@ -106,6 +110,9 @@ public class BookPanel extends SurfaceView implements SurfaceHolder.Callback{
                                 reservedSpotsIDs.add(spots.get(i).getId());
                                 initCanvas();
 
+                            } else if(duplicateID) {
+                                reservedSpotsIDs.remove(duplicateSpot);
+                                initCanvas();
                             }
                         }
 
@@ -134,7 +141,8 @@ public class BookPanel extends SurfaceView implements SurfaceHolder.Callback{
 
                         if (reservedSpotsIDs.size() > 0) {
                             Intent myIntent = new Intent(context, DateActivity.class);
-
+                            myIntent.putExtra("spaceId", space.getInfo().getId());
+                            myIntent.putExtra("spotId", reservedSpotsIDs.get(0));
                             context.startActivity(myIntent);
                         }
                     }
@@ -232,7 +240,6 @@ public class BookPanel extends SurfaceView implements SurfaceHolder.Callback{
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-
 
         initCanvas();
 

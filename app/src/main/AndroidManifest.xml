@@ -26,7 +26,8 @@
         <activity android:name=".MenuActivity" />
         <activity android:name=".CompaniesActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".QRGeneratorActivity"></activity>
+        <activity android:name=".QRGeneratorActivity" />
+        <activity android:name=".NewsFragmentActivity"></activity>
     </application>
 
 </manifest>

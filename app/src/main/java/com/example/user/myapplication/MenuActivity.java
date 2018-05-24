@@ -26,7 +26,7 @@ public class MenuActivity extends AppCompatActivity {
         companies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent e = new Intent(context, CompaniesActivity.class);
+                Intent e = new Intent(context, NewsFragmentActivity.class);
                 startActivity(e);
             }
         });

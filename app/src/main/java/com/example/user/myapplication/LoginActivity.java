@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -15,6 +16,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Created by AppUser on 5/16/2018.
@@ -67,9 +73,15 @@ public class LoginActivity extends AppCompatActivity {
                     System.out.println(         "Wrong Password");
                     errorMessage.setText("Wrong Password");
                 } else {
-                    //Intent e = new Intent(context,BookActivity.class);
-                    Intent e = new Intent(context,MenuActivity.class);
-                    startActivity(e);
+                    FirebaseAuth.getInstance().signInWithEmailAndPassword("kab13@mail.aub.edu", "Karim1").addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            Intent e = new Intent(context,MenuActivity.class);
+                            startActivity(e);
+                        }
+                    });
+
+
                 }
 
             }
