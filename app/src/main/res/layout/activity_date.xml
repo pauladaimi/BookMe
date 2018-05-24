@@ -28,7 +28,7 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/command" />
+        app:layout_constraintTop_toBottomOf="@+id/qrGenerator" />
 
     <TextView
         android:id="@+id/command"
@@ -55,5 +55,16 @@
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@+id/tv_result"
         app:layout_constraintTop_toBottomOf="@+id/b_pick" />
+
+    <Button
+        android:id="@+id/qrGenerator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="263dp"
+        android:text="Generate QR Code"
+        app:layout_constraintBottom_toTopOf="@+id/tv_result"
+        app:layout_constraintStart_toStartOf="@+id/b_pick"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

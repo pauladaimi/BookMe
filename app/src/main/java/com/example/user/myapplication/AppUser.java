@@ -1,20 +1,27 @@
 package com.example.user.myapplication;
 
+import android.graphics.Bitmap;
+
+import java.util.ArrayList;
+
 /**
  * Created by karimbouyounes on 5/22/18.
  */
 
 public class AppUser {
 
-    private String name;
-    private String lastName;
-    private String email;
+    static String firstName;
+    static String lastName;
+    static String email;
     static String username;
-    private String password;
+    static String password;
+
+    static ArrayList<String> reservedCompanies = new ArrayList<String>();
+    static Bitmap qrCode;
 
 
-    AppUser(String name, String lastName, String email, String password, String username) {
-        this.name = name;
+    AppUser(String firstName, String lastName, String email, String password, String username) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
@@ -22,9 +29,7 @@ public class AppUser {
 
     }
 
-    public String getPassword() {
-        return password;
-    }
+
 
 
 

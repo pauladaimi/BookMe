@@ -15,7 +15,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button registerBtn;
     Context context;
     AppUser appUser;
-    String name, lastName, email, password, username;
+    String firstName, lastName, email, password, username;
     TextView errorMessage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,14 +69,14 @@ public class RegisterActivity extends AppCompatActivity {
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name = editName.getText().toString();
+                firstName = editName.getText().toString();
                 lastName = editLastName.getText().toString();
                 email = editEmail.getText().toString();
                 password = editPassword.getText().toString();
                 username = editUsername.getText().toString();
 
 
-                if(name.isEmpty()) {
+                if(firstName.isEmpty()) {
                     System.out.println("Missing Name");
                     errorMessage.setText("Missing Name");
                 } else if (lastName.isEmpty()) {
@@ -92,9 +92,9 @@ public class RegisterActivity extends AppCompatActivity {
                     System.out.println("Missing Username");
                     errorMessage.setText("Missing Username");
                 } else {
-                    appUser = new AppUser(name, lastName, email, password, username);
+                    appUser = new AppUser(firstName, lastName, email, password, username);
                     System.out.println("Register");
-                    Intent e = new Intent(context, BookActivity.class);
+                    Intent e = new Intent(context, MenuActivity.class);
                     startActivity(e);
                 }
 

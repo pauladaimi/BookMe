@@ -2,6 +2,7 @@ package com.example.user.myapplication;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.hardware.SensorManager;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import retrofit2.Response;
 public class BookActivity extends Activity {
     Space space;
     Context context;
+
+    ArrayList<Integer> reservedSpotsIDs = BookPanel.reservedSpotsIDs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +62,21 @@ public class BookActivity extends Activity {
             }
         });
 
+        if(savedInstanceState != null){
+            BookPanel.reservedSpotsIDs = savedInstanceState.getIntegerArrayList("reserved spots ids");
+        }
+
+
+    }
+
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+
+        outState.putIntegerArrayList("reserved spots ids", BookPanel.reservedSpotsIDs);
 
     }
 }

@@ -63,12 +63,12 @@ public class LoginActivity extends AppCompatActivity {
                 } else if(!userUsername.equals(AppUser.username)){ //replace with search in the database
                     System.out.println(         "Wrong Username");
                     errorMessage.setText("Wrong Username");
-                } else if (!userPassword.equals(appUser.getPassword())) { //replace with search in the database
+                } else if (!userPassword.equals(appUser.password)) { //replace with search in the database
                     System.out.println(         "Wrong Password");
                     errorMessage.setText("Wrong Password");
                 } else {
-                    Intent e = new Intent(context,BookActivity.class);
-                    //Intent e = new Intent(context,DateActivity.class);
+                    //Intent e = new Intent(context,BookActivity.class);
+                    Intent e = new Intent(context,MenuActivity.class);
                     startActivity(e);
                 }
 
@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("Register");
-                Intent e = new Intent(context,RegisterActivity.class);
+                Intent e = new Intent(context, RegisterActivity.class);
                 startActivity(e);
 
 
@@ -87,4 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
+
+
 }

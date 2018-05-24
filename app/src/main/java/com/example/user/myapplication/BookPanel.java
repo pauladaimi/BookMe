@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -23,12 +24,15 @@ public class BookPanel extends SurfaceView implements SurfaceHolder.Callback{
 
 
     ArrayList<Spot> spots;
-    ArrayList<Integer> reservedSpotsIDs = new ArrayList<Integer>();
+
+
+    static ArrayList<Integer> reservedSpotsIDs = new ArrayList<Integer>();
     Canvas canvas;
     SurfaceHolder surface;
     Context context;
     Rect r;
 
+    boolean isPortrait = false;
 
 
     public BookPanel(Context context, Space space) {
@@ -43,6 +47,7 @@ public class BookPanel extends SurfaceView implements SurfaceHolder.Callback{
 
         if(this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             ratio = 2;
+            isPortrait = true;
         }
 
 
@@ -123,16 +128,18 @@ public class BookPanel extends SurfaceView implements SurfaceHolder.Callback{
 
             }
 
-            if(event.getX() > r.left && event.getX() < (r.left + r.width()) ) {
-                if(event.getY() > r.bottom && event.getY() < (Math.abs(r.height()) + r.bottom) ) {
+            if(isPortrait) {
+                if (event.getX() > r.left && event.getX() < (r.left + r.width())) {
+                    if (event.getY() > r.bottom && event.getY() < (Math.abs(r.height()) + r.bottom)) {
 
-                    if(reservedSpotsIDs.size() > 0) {
-                        Intent myIntent = new Intent(context, DateActivity.class);
+                        if (reservedSpotsIDs.size() > 0) {
+                            Intent myIntent = new Intent(context, DateActivity.class);
 
-                        context.startActivity(myIntent);
+                            context.startActivity(myIntent);
+                        }
                     }
-                }
 
+                }
             }
         }
 
@@ -151,15 +158,12 @@ public class BookPanel extends SurfaceView implements SurfaceHolder.Callback{
 
 
 
+
     @Override
     public void draw(Canvas canvas){
         super.draw(canvas);
         canvas.drawColor(Color.WHITE);
 
-        Paint p = new Paint();
-        p.setTextSize(70);
-        p.setColor(Color.MAGENTA);
-        canvas.drawText(AppUser.username, (int)(0.75*Constants.SCREEN_WIDTH), (int)(0.035*Constants.SCREEN_HEIGHT), p);
 
         boolean drawNormal = true;
         for(int i=0; i<spots.size();i++){
@@ -178,9 +182,27 @@ public class BookPanel extends SurfaceView implements SurfaceHolder.Callback{
 
         }
 
-        Paint paint = new Paint();
-        paint.setTextSize(canvas.getWidth() / 15);
-        drawCenterText(canvas, paint, "Make Reservation", false);
+
+        if(isPortrait) {
+
+            Paint paint = new Paint();
+            paint.setTextSize(70);
+            paint.setColor(Color.MAGENTA);
+            canvas.drawText(AppUser.username, (int) (0.75 * Constants.SCREEN_WIDTH), (int) (0.035 * Constants.SCREEN_HEIGHT), paint);
+
+            paint.setTextSize(canvas.getWidth() / 15);
+            drawCenterText(canvas, paint, "Make Reservation", false);
+
+        } else {
+
+            Paint paint = new Paint();
+            paint.setTextSize(70);
+            paint.setColor(Color.MAGENTA);
+            canvas.drawText(AppUser.username, (int) (0.75 * Constants.SCREEN_WIDTH), (int) (0.07 * Constants.SCREEN_HEIGHT), paint);
+
+
+
+        }
     }
 
     private Rect rect = new Rect();

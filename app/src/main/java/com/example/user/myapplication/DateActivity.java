@@ -2,6 +2,11 @@ package com.example.user.myapplication;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,11 +24,15 @@ import java.util.Calendar;
 public class DateActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     Button b_pick;
+    Button qrGenerator;
     TextView tv_result;
     TextView tv_result2;
     TextView command;
 
     int counter = -1;
+
+
+    Context context;
 
 
     int day, month, year, hour, minute;
@@ -35,10 +44,15 @@ public class DateActivity extends AppCompatActivity implements DatePickerDialog.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date);
 
+        context = this;
+
         b_pick = (Button) findViewById(R.id.b_pick);
+        qrGenerator = (Button) findViewById(R.id.qrGenerator);
         tv_result = (TextView) findViewById(R.id.tv_result);
         tv_result2 = (TextView) findViewById(R.id.tv_result2);
         command = (TextView) findViewById(R.id.command);
+
+
 
         b_pick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +64,16 @@ public class DateActivity extends AppCompatActivity implements DatePickerDialog.
                 counter ++;
                 DatePickerDialog datePickerDialog = new DatePickerDialog(DateActivity.this, DateActivity.this, year, month, day);
                 datePickerDialog.show();
+            }
+        });
+
+        qrGenerator.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(counter > 0){
+                    Intent e = new Intent(context, QRGeneratorActivity.class);
+                    startActivity(e);
+                }
             }
         });
     }
@@ -128,4 +152,7 @@ public class DateActivity extends AppCompatActivity implements DatePickerDialog.
 
 
     }
+
+
+
 }
